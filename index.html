@@ -1,0 +1,39 @@
+<style>
+td {
+	width: 10px;
+	height: 10px;
+	padding: 0;
+	margin: 0;
+}
+</style>
+<div id="container"></div>
+
+<script src="mctad.js"></script>
+<script src="main.js"></script>
+<script>
+var map = new Dungeon(80, 80);
+var result = map.generate(50).getTiles();
+
+var table = document.createElement("table");
+for (var y = 0; y < result.length; y++) {
+	var row = document.createElement("tr");
+	for (var x = 0; x < result[y].length; x++) {
+		var cell = document.createElement("td");
+		switch (result[y][x]) {
+			case Tile.Unused:
+				cell.style.background = "black";
+				break;
+			case Tile.Floor:
+				cell.style.background = "white";
+				break;
+			case Tile.Wall:
+				cell.style.background = "red";
+				break;
+		}
+		row.appendChild(cell);
+	}
+	table.appendChild(row);
+}
+
+document.getElementById("container").appendChild(table);
+</script>
